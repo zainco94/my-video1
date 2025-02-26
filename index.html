@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشغل الفيديو</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        video { width: 80%; max-width: 800px; margin-top: 20px; }
+        img { width: 200px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <h2>اسم الفيلم هنا</h2>
+    <img src="https://example.com/poster.jpg" alt="بوستر الفيلم">
+    
+    <video id="video" controls></video>
+
+    <script>
+        var video = document.getElementById('video');
+        var videoSrc = "https://fast-cdn-amd9-bry.dialymotion.online/hls/mkkhh6pzcasl4zz6qkbfiuisog3gdedt2pq4kyviw,xfakoxg6wjvrthcjyoq,4kakoxg6wj3wxvnd5zq,.urlset/master.m3u8";
+
+        if (Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource(videoSrc);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                video.play();
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = videoSrc;
+            video.play();
+        }
+    </script>
+
+</body>
+</html>
